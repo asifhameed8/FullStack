@@ -1,3 +1,6 @@
+# Demo
+There are two videos in the Demo folder.
+
 # AngularAssignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4.
@@ -53,18 +56,33 @@ Fxflex Layout is used to make the application responsive.
 ## Angular Material UI components 
 Following Angular Material UI components are used to efficiently populate the data on screen for users.
     BrowserAnimationsModule,
+
     MatToolbarModule,
+    
     MatSidenavModule,
+    
     MatButtonModule,
+    
     MatIconModule,
+    
     MatDividerModule,
+    
     MatListModule,
+    
     MatGridListModule,
+    
     MatButtonToggleModule,
+    
     MatTableModule,
+    
     MatFormFieldModule,
+    
     MatPaginatorModule,
+    
     MatInputModule,
+    
     HttpClientModule,
+    
     MatSelectModule,
+    
     MatCardModule,
