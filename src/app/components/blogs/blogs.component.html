@@ -1,0 +1,18 @@
+<! -- Header of Blogger component -->
+<div class="header">
+    <div fxLayout="row" class="box1">
+        <mat-icon class="icon">dashboard</mat-icon> 
+        <h2 class="title">Blogs</h2>
+    </div>
+    <div class="headerDescription">
+        <div class="subtitle">
+            <p>Total users : 10</p>
+        </div>
+    </div>
+</div>
+
+<div fxLayout.lt-md="column" fxLayout="row wrap" fxLayoutGap="10px 10px" fxLayoutAlign="space-around start">
+    <mat-card fxFlex="48" style="margin:5px" *ngFor="let item of list" fxLayout="row" class="margin-5">
+        <app-blogs-cards [card]="item"></app-blogs-cards>
+    </mat-card>
+</div>
