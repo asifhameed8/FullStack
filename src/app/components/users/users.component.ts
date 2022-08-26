@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+
 import {MatSort} from '@angular/material/sort';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,11 +15,13 @@ export class UsersComponent implements OnInit {
   check: boolean = true;  // for toggle between list and grid view
   displayedColumns: string[] = ['id', 'name', 'username', 'date']; //columns for users table
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   dataSource: any;
+  length = 0;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10];
+  showFirstLastButtons = false;
 
   constructor(private http: HttpClient) {
 
@@ -28,10 +30,17 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.getData().subscribe(next=>{
       this.usersList = next;
+      this.length = this.usersList.length;
       this.dataSource = new MatTableDataSource(this.usersList);
+      debugger
+   
       console.log(this.usersList)
     })
   }
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.usersList);
+    this.dataSource.paginator = this.paginator;
+}
 
   // FUnction for pagination
   setPagination(value: number){
@@ -67,6 +76,14 @@ export class UsersComponent implements OnInit {
     {
       this.check = !this.check;
     }
+  }
+  handlePageEvent(event: PageEvent) {
+    this.length = event.length;
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    const skip= this.pageIndex*this.pageSize;
+    this.dataSource = new MatTableDataSource(this.usersList.slice(skip,skip+this.pageSize));
+    return event;
   }
 }
 
